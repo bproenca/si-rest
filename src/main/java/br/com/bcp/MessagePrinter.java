@@ -1,16 +1,15 @@
 package br.com.bcp;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.messaging.Message;
 
 public class MessagePrinter {
 
-	public String print(Message<?> message){
-		return "From the inbound gateway:  1 message worked";
-	}
+	private Logger log = LoggerFactory.getLogger(MessagePrinter.class);
 	
-	public void printConsole(Message<?> message){
-		System.out.println("Message was passed to printConsole method.");
-		System.out.println(message);
+	public void print(Message<?> message){
+		log.info("Print payload:{}", message.getPayload());
 	}
 	
 }
