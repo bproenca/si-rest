@@ -9,8 +9,6 @@
 
 	<int:channel id="decorateChannel"/>
 	<int:channel id="processChannel"/>
-	<int:channel id="printChannel"/>
-	<bean class="br.com.bcp.MessagePrinter" id="printer"/>
 	<bean class="br.com.bcp.MessageDecorator" id="decorate"/>
 
 	<int-http:inbound-gateway 
@@ -26,11 +24,9 @@
 		request-channel="processChannel"
 		url="http://localhost:8086/upper/{name}"
 		http-method="GET"
-		expected-response-type="java.lang.String"
-		
+		expected-response-type="java.lang.String"		
 	>
 		<int-http:uri-variable name="name" expression="payload"/>
 	</int-http:outbound-gateway>
 
-	<int:service-activator ref="printer" input-channel="printChannel" method="print"/>
 </beans>
